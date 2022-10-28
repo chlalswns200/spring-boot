@@ -11,13 +11,14 @@ import java.sql.SQLException;
 @Repository
 public class UserDao {
 
+
     private final JdbcTemplate jdbcTemplate;
 
     public UserDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void add(final User user) {
+    public int add(final User user) {
         this.jdbcTemplate.update("INSERT INTO users(id, name, password) values(?,?,?)",
                 user.getId(),
                 user.getName(),
@@ -32,6 +33,10 @@ public class UserDao {
     public void findById(String id) {
         String sql = "SELECT * FROM users WHERE id = ?";
         this.jdbcTemplate.queryForObject(sql, rowMapper, id);
+    }
+
+    public void deleteById(String id) {
+        this.jdbcTemplate.update("delete from users WHERE id=?", id);
     }
 
 

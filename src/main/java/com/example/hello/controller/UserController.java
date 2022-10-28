@@ -2,6 +2,8 @@ package com.example.hello.controller;
 
 import com.example.hello.dao.UserDao;
 import com.example.hello.domain.User;
+import com.example.hello.domain.dto.UserDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +17,13 @@ public class UserController {
     }
 
     @PostMapping("/sign")
-    public void addUser(@RequestBody User user) {
-        userDao.add(user);
+    public ResponseEntity<Integer> findById(@RequestBody UserDto userDto) {
+
+        User user = new User(userDto.getId(),userDto.getName(),userDto.getPassword());
+
+        return ResponseEntity
+                .ok()
+                .body(userDao.add(user));
     }
 
     @DeleteMapping("/deleteall")
@@ -25,8 +32,9 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteAll(@PathVariable int id) {
-        userDao.deleteOne();
+    public ResponseEntity<Void> deleteById(@PathVariable("id") String id) {
+        userDao.deleteById(id);
+        return ResponseEntity.status(204).build(); // No Contents
     }
 
 }
