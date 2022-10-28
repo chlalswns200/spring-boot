@@ -19,7 +19,7 @@ public class UserController {
     @PostMapping("/sign")
     public ResponseEntity<Integer> findById(@RequestBody UserDto userDto) {
 
-        User user = new User(userDto.getId(),userDto.getName(),userDto.getPassword());
+        User user = new User(userDto.getId(), userDto.getName(), userDto.getPassword());
 
         return ResponseEntity
                 .ok()
@@ -37,4 +37,14 @@ public class UserController {
         return ResponseEntity.status(204).build(); // No Contents
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<User> get(@PathVariable String id) {
+        try {
+            User user = userDao.findById(id);
+            return ResponseEntity.ok().body(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
