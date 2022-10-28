@@ -3,10 +3,12 @@ package com.example.hello.dao;
 import com.example.hello.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class UserDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -32,6 +34,8 @@ public class UserDao {
         this.jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 
+
+
     RowMapper rowMapper = new RowMapper() {
         @Override
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -40,8 +44,5 @@ public class UserDao {
             return user;
         }
     };
-
-
-
 
 }
