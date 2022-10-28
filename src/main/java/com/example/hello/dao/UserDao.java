@@ -27,18 +27,21 @@ public class UserDao {
         return this.jdbcTemplate.update("delete from users");
     }
 
-    public User findById(String id) {
-        String sql = "select * from users where id = ?";
-        RowMapper<User> rowMapper = new RowMapper<User>() {
-            @Override
-            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                User user = new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
-                return user;
-            }
-        };
-
-        return this.jdbcTemplate.queryForObject(sql, rowMapper, id);
+    public void findById(String id) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        this.jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
+
+    RowMapper rowMapper = new RowMapper() {
+        @Override
+        public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+            User user = new User(rs.getString("id"), rs.getString("name"),
+                    rs.getString("password"));
+            return user;
+        }
+    };
+
+
 
 
 }
