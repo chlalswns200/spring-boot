@@ -1,14 +1,11 @@
-package com.example.hello.domain;
+package com.example.hello.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
-@Setter
-public class User {
-
+public class UserDto {
     private String id;
     private String name;
     private String password;
