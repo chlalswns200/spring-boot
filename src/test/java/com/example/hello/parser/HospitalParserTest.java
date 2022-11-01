@@ -26,11 +26,38 @@ class HospitalParserTest {
     HospitalDao hospitalDao;
 
     @Test
-    @DisplayName("Hospital이 insert가 잘 되는지")
-    void add() {
+    @DisplayName("Hospital이 insert가 잘 되고 select도 잘 되는지")
+    void addAndGet() {
+        hospitalDao.deleteAll();
+        assertEquals(0,hospitalDao.getCount());
+
         HospitalParser hp = new HospitalParser();
         Hospital parse = hp.parse(line1);
         hospitalDao.add(parse);
+
+        Hospital selectedHospital = hospitalDao.findById(parse.getId());
+        assertEquals(selectedHospital.getId(), parse.getId());
+        assertEquals(selectedHospital.getOpenServiceName(), parse.getOpenServiceName());
+
+        assertEquals(selectedHospital.getOpenLocalGovernmentCode(),parse.getOpenLocalGovernmentCode());
+        assertEquals(selectedHospital.getManagementNumber(),parse.getManagementNumber());
+        assertEquals(selectedHospital.getBusinessStatus(), parse.getBusinessStatus()); // idx:7
+        assertEquals(selectedHospital.getBusinessStatusCode(), parse.getBusinessStatusCode());
+
+        assertTrue(selectedHospital.getLicenseDate().isEqual(parse.getLicenseDate()));
+
+        assertEquals(selectedHospital.getPhone(), parse.getPhone());
+        assertEquals(selectedHospital.getFullAddress(), parse.getFullAddress());
+        assertEquals(selectedHospital.getRoadNameAddress(), parse.getRoadNameAddress());
+        assertEquals(selectedHospital.getHospitalName(), parse.getHospitalName());
+
+        assertEquals(selectedHospital.getBusinessTypeName(), parse.getBusinessTypeName());
+        assertEquals(selectedHospital.getHealthcareProviderCount(), parse.getHealthcareProviderCount());
+        assertEquals(selectedHospital.getPatientRoomCount(), parse.getPatientRoomCount());
+        assertEquals(selectedHospital.getTotalNumberOfBeds(), parse.getTotalNumberOfBeds());
+        // 날짜, float
+        assertEquals(selectedHospital.getTotalAreaSize(), parse.getTotalAreaSize());
+
     }
     @Test
     void name() throws IOException {
