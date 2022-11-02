@@ -26,6 +26,15 @@ class HospitalParserTest {
     HospitalDao hospitalDao;
 
     @Test
+    void addAll() throws IOException {
+        hospitalDao.deleteAll();
+        List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
+        for (Hospital hospital : hospitalList) {
+            hospitalDao.add(hospital);
+        }
+    }
+
+    @Test
     @DisplayName("Hospital이 insert가 잘 되고 select도 잘 되는지")
     void addAndGet() {
         hospitalDao.deleteAll();

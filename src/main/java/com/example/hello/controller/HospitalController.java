@@ -20,7 +20,7 @@ public class HospitalController {
 
     @GetMapping("/{id}")
     public HospitalDto get(@PathVariable int id) {
-        Hospital byId = hospitalDao.findById(1);
+        Hospital byId = hospitalDao.findById(id);
         String isClose ="영업중";
         if(byId.getBusinessStatusCode()==3) isClose ="폐업";
         return new HospitalDto(byId.getHospitalName(), byId.getFullAddress(),
