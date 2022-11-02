@@ -30,7 +30,7 @@ class HospitalParserTest {
         hospitalDao.deleteAll();
         List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
         for (Hospital hospital : hospitalList) {
-            hospitalDao.add(hospital);
+           // hospitalDao.add(hospital);
         }
     }
 
