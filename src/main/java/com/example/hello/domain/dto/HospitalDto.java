@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 public class HospitalDto {
 
+    private String hospitalName;
     private String fullAddress;
     private String roadNameAddress;
-    private String hospitalName;
     private int healthcareProviderCount;
     private int patientRoomCount;
     private float totalAreaSize;
