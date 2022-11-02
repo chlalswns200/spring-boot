@@ -33,9 +33,7 @@ public class HospitalController {
         Optional<HospitalDto> hp = Optional.of(hospitalDto);
 
         if (!hp.isEmpty()) {
-            return ResponseEntity.ok().body(new HospitalDto(hospitalDto.getHospitalName(), hospitalDto.getFullAddress(),
-                    hospitalDto.getRoadNameAddress(),hospitalDto.getHealthcareProviderCount(),
-                    hospitalDto.getPatientRoomCount(),hospitalDto.getTotalAreaSize(),hospitalDto.getIsClose()));
+            return ResponseEntity.ok().body(hospitalDto);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HospitalDto());
         }
