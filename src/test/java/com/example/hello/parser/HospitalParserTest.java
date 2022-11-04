@@ -2,16 +2,10 @@ package com.example.hello.parser;
 
 import com.example.hello.dao.HospitalDao;
 import com.example.hello.domain.Hospital;
-import org.junit.jupiter.api.DisplayName;
+import com.example.hello.service.HospitalService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class HospitalParserTest {
@@ -24,6 +18,15 @@ class HospitalParserTest {
 
     @Autowired
     HospitalDao hospitalDao;
+
+    @Autowired
+    HospitalService hospitalService;
+
+    @Test
+    void addAll2() {
+        hospitalDao.deleteAll();
+        hospitalService.insertLargeVolumeHospitalData2(filename);
+    }
 
 //    @Test
 //    void addAll() throws IOException {
